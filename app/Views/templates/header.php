@@ -19,7 +19,7 @@
         <p>We have all record</p>
     </div>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-            <div class="container-fluid col-11">
+            <div class="container-fluid col-10">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                     <a class='nav-link active' href="<?php echo base_url('books'); ?>">Books</a>
@@ -27,7 +27,15 @@
 
                 </ul>
             </div>
-            <div class="container-fluid">
+            <div class="container-fluid col-1">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                    <a class="btn btn-sm btn-success" href="<?php echo base_url('users'); ?>">Profile</a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="container-fluid col-1">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                     <a class="btn btn-sm btn-danger" href="<?php echo base_url('logout'); ?>">Logout</a>

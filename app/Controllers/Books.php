@@ -107,7 +107,7 @@ class Books extends BaseController
 
         // Gets the validated data.
         $post = $this->validator->getValidated();
-
+        $book_cover = $this->upload('book_cover');
         $model = model(BookModel::class);
         $model->where('slug', $post['slug']);
 
@@ -115,6 +115,7 @@ class Books extends BaseController
             'book' => $post['book'],
             'author'  => $post['author'],
             'summary' => $post['summary'],
+            'book_cover' => $book_cover,
         ]);
         $model->update();
 
