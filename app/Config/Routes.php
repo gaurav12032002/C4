@@ -3,6 +3,12 @@
 use CodeIgniter\Router\RouteCollection;
 use App\Controllers\Users;
 use App\Controllers\Books;
+use App\Controllers\Api;
+
+$routes->group('api',['filter' => 'apiAuth'], function($routes) {
+    $routes->get('getBooks', [Api::class, 'getBooks']);
+});
+
 
 $routes->group('', ['filter' => 'authGuard'], function(RouteCollection $routes) {
     //Books route
@@ -40,8 +46,3 @@ $routes->group('', ['filter' => 'authFilter'], function(RouteCollection $routes)
 
 $routes->get('logout', 'Users::logout');
 
-
-// // Logged in dashboard
-// $routes->group('', ['filter' => 'auth'], function(RouteCollection $routes) {
-//     $routes->get('/', 'Users::index');
-// });
