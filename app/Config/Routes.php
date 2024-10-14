@@ -31,6 +31,9 @@ $routes->group('', ['filter' => 'authFilter'], function(RouteCollection $routes)
     $routes->get('/', 'Users::index');
     $routes->post('login', [Users::class, 'login']); 
     $routes->post('signup', [Users::class, 'signup']);
+    $routes->get('/forget_password', 'Users::forget_password');
+    $routes->post('users/reset_password', [Users::class, 'reset_password']);
+
     // $routes->post('users/update','Users::update'); 
 
 });

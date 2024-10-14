@@ -1,9 +1,7 @@
 <?= session()->getFlashdata('error') ?>
 <?= validation_list_errors() ?>
 <h2 class="text-center"><?= esc($title) ?></h2>
-<hr>
-
-
+<hr> 
 <?php echo form_open_multipart (base_url('users/change_password')); ?>
     <?= csrf_field() ?>
     <div class="col-6">

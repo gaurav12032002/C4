@@ -1,12 +1,14 @@
 <?php
-
 namespace App\Controllers;
 use App\Models\UserModel;
+use App\Libraries\Email;
 
 class Users extends BaseController
 {
     public function index(): string
-    {
+    { 
+       // $this->sendMail('gkthakur2922@gmail.com','testing','hello world');
+
         return view('welcome_message');
     }
     public function login()
@@ -82,7 +84,35 @@ class Users extends BaseController
         ]);
         return $this->index();
     }
-    public function profile()
+    
+     public function forget_password()
+        {
+           $data['title'] = "Forget Password";
+            
+          return view('users/forget_password',$data);
+        
+        }
+
+    public function reset_password()
+        {
+            helper('form');
+            $post = $this->request->getPost(['email']);
+            echo "<pre>"; print_r($post);die();
+           
+            if (! $this->validateData($post, [
+                'email'  => 'required',
+            ])) {
+                // The validation fails, so returns the form.
+                return $this->index();
+            }
+            $post = $this->validator->getValidated();
+            $model = model(UserModel::class);
+            
+
+        }
+
+
+        public function profile()
     {
         $data = [
             'user' => session()->get('userdata'),
@@ -244,5 +274,17 @@ class Users extends BaseController
             $session->destroy();
             return redirect()->to('/');
         }
+
+
+    public function sendMail($to,$subject,$message) {
+        $email = new Email();
+        $result = $email->sendEmail($to, $subject, $message); 
+        if($result === true) { 
+        echo 'Email sent successfully!';
+        } 
+        else { 
+            echo $result; // Output the error message 
+            } 
+    }
   }
-// $this->session->get('name'); //outp
+

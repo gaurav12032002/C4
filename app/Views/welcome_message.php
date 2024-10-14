@@ -203,7 +203,7 @@ form .field input[type="submit"]{
                         <input type="password" name="password" id="password" placeholder="Password" required>
                     </div>
                     <div class="pass-link">
-                        <a href="#">Forgot Password</a>
+                        <a href="<?php echo base_url('forget_password'); ?>">Forgot Password</a>
                     </div>
                     <div class="field">
                         <input type="submit" value="Login">

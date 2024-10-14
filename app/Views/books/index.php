@@ -7,10 +7,10 @@
 <?php if ($books !== []) { ?>
     <?php foreach ($books as $books_item): ?>
         <div>
-        <img src="<?php echo base_url('./icon/book.png'); ?>" height="40px" width="35px"alt="">
+        <img src="<?php echo base_url('./icon/open-book.png'); ?>" height="40px" width="35px"alt="">
         <h3><?= esc($books_item['book']) ?></h3>
            <?= esc($books_item['author']) ?> 
-        <p><a href="<?= base_url('./books/'. esc($books_item['slug'], 'url')) ?>" class="btn btn-sm btn-success">View article</a></p>
+        <p><a href="<?= base_url('./books/'. esc($books_item['slug'], 'url')) ?>" class="btn btn-sm btn-link">View article</a></p>
         </div>
     <?php endforeach ?>
     
