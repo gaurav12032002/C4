@@ -10,7 +10,11 @@ $routes->group('api',['filter' => 'apiAuth'], function($routes) {
     $routes->get('viewBook/(:num)', [Api::class, 'viewBook']);
     $routes->post('createBook', [Api::class, 'createBook']);
     $routes->post('updateBook', [Api::class, 'updateBook']);
-    $routes->get('deleteBook',[Api::class,'deleteBook']); 
+    $routes->get('deleteBook/(:num)',[Api::class,'deleteBook']); 
+    $routes->post('userSignup', [Api::class, 'userSignup']);
+    $routes->post('updateUser', [Api::class, 'updateUser']);
+    $routes->post('changeUserPassword',[Api::class,'changeUserPassword']); 
+    $routes->post('userLogin', [Api::class, 'userLogin']); 
 });
 
 
