@@ -15,8 +15,6 @@ class Users extends BaseController
     {
         helper('form');
         $session = session();
-        // echo 'jhjkhjkh'; die;
-
         $post = $this->request->getPost(['email','password']);
 
         // Checks whether the submitted data passed the validation rules.
@@ -30,7 +28,6 @@ class Users extends BaseController
         $post = $this->validator->getValidated();
         $model = model(UserModel::class);
         $user = $model->getUserByEmail($post['email']);
-        //echo"<pre>";print_r($user);die;
         if($user){
             if(password_verify($post['password'],$user['password'])){
                 unset($user['password']);
@@ -44,15 +41,10 @@ class Users extends BaseController
         return redirect()->back()->withinput()->with('errors','the email you have provided not match');
     }
 
-
-
     public function signup()
     {
         helper('form');
-        // echo 'jhjkhjkh'; die;
-
         $post = $this->request->getPost(['full_name', 'bio','email','password','confirm_password']);
-        //echo "<pre>"; print_r($post);die();
         // Checks whether the submitted data passed the validation rules.
         if (! $this->validateData($post, [
             'full_name' => 'required|max_length[255]|min_length[3]',

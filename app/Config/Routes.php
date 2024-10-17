@@ -7,6 +7,10 @@ use App\Controllers\Api;
 
 $routes->group('api',['filter' => 'apiAuth'], function($routes) {
     $routes->get('getBooks', [Api::class, 'getBooks']);
+    $routes->get('viewBook/(:num)', [Api::class, 'viewBook']);
+    $routes->post('createBook', [Api::class, 'createBook']);
+    $routes->post('updateBook', [Api::class, 'updateBook']);
+    $routes->get('deleteBook',[Api::class,'deleteBook']); 
 });
 
 
