@@ -63,6 +63,7 @@ class Api extends ResourceController
         public function createBook()
         {
             helper('form');
+            helper('image');
              $post = $this->request->getPost(['user_id','book','author','summary']);
              if (! $this->validateData($post, [
                 'book' => 'required|max_length[255]|min_length[3]',
@@ -73,6 +74,13 @@ class Api extends ResourceController
 
             }
            // $book_cover = $this->upload('book_cover');
+           $book_cover = upload_image('book_cover');
+           if (isset($book_cover['error'])) {
+               // Handle error
+               return redirect()->back()->with('error', $book_cover['error']);
+           } else {
+               $book_cover =  $book_cover['file_name'];
+           }
             $post = $this->validator->getValidated();
              $model = model(BookModel::class);
              $slug =  url_title($post['book'], '-', true);
@@ -81,7 +89,7 @@ class Api extends ResourceController
                 'slug'=> $slug,
                 'author'  => $post['author'],
                 'summary' => $post['summary'],
-                //'book_cover' => $book_cover,
+                'book_cover' => $book_cover,
             ]);
             return $this->respondCreated(['message' => 'Book created successfully', 'status' =>1 ]);
         }
@@ -89,6 +97,7 @@ class Api extends ResourceController
         public function updateBook()
         {
             helper('form');
+            helper('image');
             $post = $this->request->getPost(['slug','book','author','summary']);
             if (! $this->validateData($post, [
                'book' => 'required|max_length[255]|min_length[3]',
@@ -99,6 +108,13 @@ class Api extends ResourceController
                return $this->respond(['message' => $this->validator->getErrors(), 'status' =>0]);
 
            }
+           $book_cover = upload_image('book_cover');
+           if (isset($book_cover['error'])) {
+               // Handle error
+               return redirect()->back()->with('error', $book_cover['error']);
+           } else {
+               $book_cover =  $book_cover['file_name'];
+           }
            $post = $this->validator->getValidated();
            $model = model(BookModel::class);
            $model->where('slug', $post['slug']);
@@ -106,6 +122,7 @@ class Api extends ResourceController
             'book' => $post['book'],
             'author'  => $post['author'],
             'summary' => $post['summary'],
+            'book_cover' => $book_cover,
         ]);
         $model->update();
         return $this->respond(['message' => 'Book updated successfully', 'status' =>1 ]);

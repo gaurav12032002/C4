@@ -46,7 +46,7 @@ class Books extends BaseController
     public function create()
     {
         helper('form');
-
+        helper('image');
         $post = $this->request->getPost(['book', 'author','summary']);
 
         // Checks whether the submitted data passed the validation rules.
@@ -61,8 +61,16 @@ class Books extends BaseController
 
         // Gets the validated data.
         $post = $this->validator->getValidated();
-        $book_cover = $this->upload('book_cover');
-     
+        //$book_cover = $this->upload('book_cover');
+
+        $book_cover = upload_image('book_cover');
+        if (isset($book_cover['error'])) {
+            // Handle error
+            return redirect()->back()->with('error', $book_cover['error']);
+        } else {
+            $book_cover =  $book_cover['file_name'];
+        }
+
         $model = model(BookModel::class);
         $slug =  url_title($post['book'], '-', true);
         $model->save([
@@ -91,7 +99,7 @@ class Books extends BaseController
     public function update()
     {
         helper('form');
-
+        helper('image');
         $post = $this->request->getPost(['book', 'author','summary','slug']);
 
         // Checks whether the submitted data passed the validation rules.
@@ -107,7 +115,13 @@ class Books extends BaseController
 
         // Gets the validated data.
         $post = $this->validator->getValidated();
-        $book_cover = $this->upload('book_cover');
+        $book_cover = upload_image('book_cover');
+        if (isset($book_cover['error'])) {
+            // Handle error
+            return redirect()->back()->with('error', $book_cover['error']);
+        } else {
+            $book_cover =  $book_cover['file_name'];
+        }
         $model = model(BookModel::class);
         $model->where('slug', $post['slug']);
 

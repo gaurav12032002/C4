@@ -231,6 +231,7 @@ form .field input[type="submit"]{
                     <div class="field">
                        <textarea name="bio" class="form-control"  id="bio" placeholder="Bio" required></textarea>
                     </div>
+                   
                     <div class="field">
                         <input type="submit" value="Signup" required>
                     </div>
