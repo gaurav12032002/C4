@@ -17,7 +17,7 @@
     <br>
     <div class="col-6">
     <label for="body"> Bio</label>
-    <textarea name="bio" class="form-control" id="bio" value="<?= $edit['bio']  ?>"></textarea>
+    <textarea name="bio" class="form-control" id="bio" <?= $edit['bio']  ?>></textarea>
     </div>
     <br>
     <div class="form-group">

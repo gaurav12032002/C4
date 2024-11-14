@@ -16,7 +16,7 @@
     
 <?php }else{ ?>
 
-<h3>No News</h3>
+<h3>No Books</h3>
 
 <p>Unable to find any book for you.</p>
 

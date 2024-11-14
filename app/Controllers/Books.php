@@ -30,7 +30,7 @@ class Books extends BaseController
         }
 
         $data['title'] = $data['books']['book'];
-
+//echo "<pre>";print_r($data);die;
         return view('templates/header', $data)
             . view('books/view')
             . view('templates/footer');
